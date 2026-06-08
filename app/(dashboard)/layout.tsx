@@ -37,8 +37,6 @@ export default function DashboardLayout({
         {children}
       </main>
       <BottomNav />
-      {/* Espacio para el footer global */}
-      <div className="h-12 md:h-8" />
     </div>
   )
 }
