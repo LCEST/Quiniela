@@ -1,0 +1,26 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno
+.env.local
+.env
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# clerk configuration (can include secrets)
+/.clerk/
