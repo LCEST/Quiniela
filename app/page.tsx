@@ -201,25 +201,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative px-4 py-12 border-t border-white/5">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-emerald-500 flex items-center justify-center">
-              <Trophy className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-foreground font-bold">Quiniela Mundial 2026</span>
-          </div>
-          <div className="space-y-1">
-            <p className="text-muted text-sm">
-              Built by Luis Esturbán
-            </p>
-            <p className="text-muted/50 text-xs">
-              Next.js · Clerk · Supabase · Tailwind CSS
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

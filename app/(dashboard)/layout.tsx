@@ -36,11 +36,6 @@ export default function DashboardLayout({
       <main className="flex-1 pb-24 md:pb-8">
         {children}
       </main>
-      <footer className="px-4 py-4 text-center border-t border-white/5">
-        <p className="text-muted/50 text-xs">
-          Built by Luis Esturbán · Next.js · Clerk · Supabase · Tailwind CSS
-        </p>
-      </footer>
       <BottomNav />
     </div>
   )
