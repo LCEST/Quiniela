@@ -21,5 +21,9 @@ export function formatTime(date: string | Date): string {
 }
 
 export function isMatchLocked(matchDate: string | Date): boolean {
-  return new Date(matchDate) <= new Date()
+  // Bloquear 30 minutos antes de que inicie el partido
+  const matchTime = new Date(matchDate).getTime()
+  const now = new Date().getTime()
+  const thirtyMinutesBefore = matchTime - (30 * 60 * 1000)
+  return now >= thirtyMinutesBefore
 }

@@ -78,8 +78,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Match not found' }, { status: 404 })
     }
 
-    if (match.status !== 'upcoming' || new Date(match.match_date) <= new Date()) {
-      return NextResponse.json({ error: 'Match is locked for predictions' }, { status: 403 })
+    // Bloquear predicciones 30 minutos antes del partido
+    const matchTime = new Date(match.match_date).getTime()
+    const now = new Date().getTime()
+    const thirtyMinutesBefore = matchTime - (30 * 60 * 1000)
+    if (match.status !== 'upcoming' || now >= thirtyMinutesBefore) {
+      return NextResponse.json({ error: 'Match is locked for predictions (30 min before)' }, { status: 403 })
     }
 
     // Upsert prediction
