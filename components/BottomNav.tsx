@@ -19,7 +19,8 @@ export default function BottomNav() {
   const userIsAdmin = isAdmin(user?.emailAddresses?.[0]?.emailAddress)
 
   const navItems = [
-    { href: '/partidos', label: 'Partidos', icon: Home },
+    { href: '/home', label: 'Inicio', icon: Home },
+    { href: '/partidos', label: 'Partidos', icon: Trophy },
     { href: '/ranking', label: 'Ranking', icon: BarChart3 },
   ]
 

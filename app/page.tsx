@@ -71,7 +71,7 @@ export default function HomePage() {
 
               <SignedIn>
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Link href="/partidos">
+                  <Link href="/home">
                     <button className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-500 text-white rounded-2xl font-bold text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all flex items-center gap-3">
                       <Trophy className="w-5 h-5" />
                       Ir al Dashboard
