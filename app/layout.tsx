@@ -27,12 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      signInUrl="/sign-in"
-      signUpUrl="/sign-up"
-      afterSignInUrl="/partidos"
-      afterSignUpUrl="/partidos"
-    >
+    <ClerkProvider>
       <html lang="es" className="dark">
         <body className="bg-background text-foreground antialiased min-h-screen">
           <QueryProvider>
