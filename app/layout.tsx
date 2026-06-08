@@ -49,7 +49,7 @@ export default function RootLayout({
               {children}
             </div>
           </QueryProvider>
-          <footer className="sticky bottom-16 z-[60] px-4 py-4 text-center border-t border-white/20 bg-background">
+          <footer className="px-4 py-4 text-center border-t border-white/20 bg-background mb-16 md:mb-0">
             <p className="text-white/60 text-xs font-medium">
               Built by Luis Esturbán · Next.js · Clerk · Supabase · Tailwind CSS
             </p>
