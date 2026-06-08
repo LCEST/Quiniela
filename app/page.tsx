@@ -4,6 +4,7 @@ import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { Trophy, Globe, Zap, Shield, Users, Smartphone, ArrowRight, Sparkles, Star, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
@@ -201,6 +202,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <Footer />
     </div>
   )
 }
