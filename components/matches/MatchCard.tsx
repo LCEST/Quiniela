@@ -3,9 +3,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Match, Prediction, PredictionResult } from '@/types'
-import { cn, formatDate, formatTime, isMatchLocked } from '@/lib/utils'
+import { cn, formatDate, formatTime } from '@/lib/utils'
 import Flag from '@/components/Flag'
 import { Badge, GlassCard } from '@/components/ui/modern'
+import { useServerTime } from '@/hooks/useServerTime'
 import { 
   Trophy, 
   Lock, 
@@ -37,7 +38,13 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [validationError, setValidationError] = useState<string | null>(null)
   
-  const locked = isMatchLocked(match.match_date)
+  const { serverTime } = useServerTime()
+  
+  // Validar bloqueo con hora del servidor (no se puede manipular)
+  const matchTime = new Date(match.match_date).getTime()
+  const thirtyMinutesBefore = matchTime - (30 * 60 * 1000)
+  const locked = serverTime >= thirtyMinutesBefore
+  
   const isLive = match.status === 'live'
   const isFinished = match.status === 'finished'
   const hasPrediction = !!prediction
