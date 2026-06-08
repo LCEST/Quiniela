@@ -18,7 +18,8 @@ import {
   Sparkles,
   MapPin,
   Landmark,
-  Zap
+  Zap,
+  AlertCircle
 } from 'lucide-react'
 
 interface MatchCardProps {
@@ -34,14 +35,52 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
   const [homeScore, setHomeScore] = useState<string>(prediction?.home_score?.toString() || '')
   const [awayScore, setAwayScore] = useState<string>(prediction?.away_score?.toString() || '')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [validationError, setValidationError] = useState<string | null>(null)
   
   const locked = isMatchLocked(match.match_date)
   const isLive = match.status === 'live'
   const isFinished = match.status === 'finished'
   const hasPrediction = !!prediction
+
+  // Validar marcador cuando cambia
+  const validateScore = (hScore: string, aScore: string, result: PredictionResult | null) => {
+    if (!result || !hScore || !aScore) {
+      setValidationError(null)
+      return true
+    }
+
+    const h = parseInt(hScore)
+    const a = parseInt(aScore)
+
+    if (isNaN(h) || isNaN(a)) {
+      setValidationError(null)
+      return true
+    }
+
+    if (result === 'home_win' && h <= a) {
+      setValidationError(`El marcador debe ser mayor para ${match.home_team?.code}`)
+      return false
+    }
+    if (result === 'away_win' && a <= h) {
+      setValidationError(`El marcador debe ser mayor para ${match.away_team?.code}`)
+      return false
+    }
+    if (result === 'draw' && h !== a) {
+      setValidationError('El marcador debe ser igual para empate')
+      return false
+    }
+
+    setValidationError(null)
+    return true
+  }
   
   const handleSubmit = async () => {
     if (!selectedResult || locked) return
+
+    // Validar marcador antes de enviar
+    if (homeScore && awayScore && !validateScore(homeScore, awayScore, selectedResult)) {
+      return
+    }
     
     setIsSubmitting(true)
     try {
@@ -289,19 +328,28 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
                   <div className="grid grid-cols-3 gap-2">
                     <ResultButton
                       isSelected={selectedResult === 'home_win'}
-                      onClick={() => setSelectedResult('home_win')}
+                      onClick={() => {
+                        setSelectedResult('home_win')
+                        validateScore(homeScore, awayScore, 'home_win')
+                      }}
                       label={`Gana ${match.home_team?.code}`}
                       icon={<Shield className="w-4 h-4" />}
                     />
                     <ResultButton
                       isSelected={selectedResult === 'draw'}
-                      onClick={() => setSelectedResult('draw')}
+                      onClick={() => {
+                        setSelectedResult('draw')
+                        validateScore(homeScore, awayScore, 'draw')
+                      }}
                       label="Empate"
                       icon={<TrendingUp className="w-4 h-4" />}
                     />
                     <ResultButton
                       isSelected={selectedResult === 'away_win'}
-                      onClick={() => setSelectedResult('away_win')}
+                      onClick={() => {
+                        setSelectedResult('away_win')
+                        validateScore(homeScore, awayScore, 'away_win')
+                      }}
                       label={`Gana ${match.away_team?.code}`}
                       icon={<Shield className="w-4 h-4" />}
                     />
@@ -328,7 +376,10 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
                               <span className="text-xs text-muted font-medium">{match.home_team?.code}</span>
                               <ScoreInput
                                 value={homeScore}
-                                onChange={setHomeScore}
+                                onChange={(val) => {
+                                  setHomeScore(val)
+                                  validateScore(val, awayScore, selectedResult)
+                                }}
                               />
                             </div>
                             <span className="text-muted font-bold text-lg mt-5">-</span>
@@ -336,13 +387,31 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
                               <span className="text-xs text-muted font-medium">{match.away_team?.code}</span>
                               <ScoreInput
                                 value={awayScore}
-                                onChange={setAwayScore}
+                                onChange={(val) => {
+                                  setAwayScore(val)
+                                  validateScore(homeScore, val, selectedResult)
+                                }}
                               />
                             </div>
-                          </div>
-                        </div>
+                           </div>
+                           
+                           {/* Validation Error */}
+                           <AnimatePresence>
+                             {validationError && (
+                               <motion.div
+                                 initial={{ opacity: 0, y: -10 }}
+                                 animate={{ opacity: 1, y: 0 }}
+                                 exit={{ opacity: 0, y: -10 }}
+                                 className="mt-3 flex items-center gap-2 text-sm text-red-400 bg-red-500/10 rounded-lg px-3 py-2"
+                               >
+                                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                 {validationError}
+                               </motion.div>
+                             )}
+                           </AnimatePresence>
+                         </div>
 
-                        {/* Save Button */}
+                         {/* Save Button */}
                         <motion.button
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
@@ -420,7 +489,7 @@ function ResultButton({ isSelected, onClick, label, icon }: {
   )
 }
 
-function ScoreInput({ value, onChange }: { value: string; onChange: (val: string) => void }) {
+function ScoreInput({ value, onChange, hasError }: { value: string; onChange: (val: string) => void; hasError?: boolean }) {
   return (
     <div className="relative">
       <input
@@ -433,6 +502,7 @@ function ScoreInput({ value, onChange }: { value: string; onChange: (val: string
           'w-16 h-14 text-center text-2xl font-black bg-card/80 border-2 rounded-xl',
           'focus:border-primary focus:outline-none transition-all',
           'text-foreground placeholder:text-muted/30',
+          hasError ? 'border-red-400/60 shadow-lg shadow-red-500/10' : 
           value ? 'border-primary/40 shadow-lg shadow-primary/10' : 'border-white/10'
         )}
         placeholder="0"

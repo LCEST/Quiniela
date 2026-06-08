@@ -44,6 +44,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    // Validar que el marcador sea consistente con el resultado
+    if (home_score !== null && away_score !== null && home_score !== undefined && away_score !== undefined) {
+      const h = parseInt(home_score)
+      const a = parseInt(away_score)
+      
+      if (!isNaN(h) && !isNaN(a)) {
+        if (predicted_result === 'home_win' && h <= a) {
+          return NextResponse.json({ error: 'El marcador no coincide: Gana Local requiere marcador mayor para el equipo local', code: 'INVALID_SCORE' }, { status: 400 })
+        }
+        if (predicted_result === 'away_win' && a <= h) {
+          return NextResponse.json({ error: 'El marcador no coincide: Gana Visitante requiere marcador mayor para el equipo visitante', code: 'INVALID_SCORE' }, { status: 400 })
+        }
+        if (predicted_result === 'draw' && h !== a) {
+          return NextResponse.json({ error: 'El marcador no coincide: Empate requiere marcadores iguales', code: 'INVALID_SCORE' }, { status: 400 })
+        }
+      }
+    }
+
     const supabase = createServiceClient()
 
     // Sync user to Supabase first
