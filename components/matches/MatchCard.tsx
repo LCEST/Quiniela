@@ -7,6 +7,7 @@ import { cn, formatDate, formatTime } from '@/lib/utils'
 import Flag from '@/components/Flag'
 import { Badge, GlassCard } from '@/components/ui/modern'
 import { useServerTime } from '@/hooks/useServerTime'
+import { MatchCountdown } from './MatchCountdown'
 import { 
   Trophy, 
   Lock, 
@@ -152,6 +153,9 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
             <Badge variant="primary">
               Grupo {match.group_letter}
             </Badge>
+            {!isLive && !isFinished && (
+              <MatchCountdown matchDate={match.match_date} />
+            )}
           </div>
           
           {hasPrediction && (
