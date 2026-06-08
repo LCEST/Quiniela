@@ -37,7 +37,9 @@ export default function DashboardLayout({
       <main className="flex-1 pb-32 md:pb-12">
         {children}
       </main>
-      <Footer />
+      <div className="mb-20">
+        <Footer />
+      </div>
       <BottomNav />
     </div>
   )
