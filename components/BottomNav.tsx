@@ -102,6 +102,13 @@ export default function BottomNav() {
         </div>
       </div>
 
+      {/* Footer Text */}
+      <div className="relative text-center py-1 border-t border-white/5 bg-background/80">
+        <p className="text-white/40 text-[9px] font-medium">
+          Built by Luis Esturbán · Next.js · Clerk · Supabase · Tailwind CSS
+        </p>
+      </div>
+
       {/* Safe Area Spacer for iOS */}
       <div className="h-[env(safe-area-inset-bottom)]" />
     </nav>

@@ -4,7 +4,6 @@ import { useAuth } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import BottomNav from '@/components/BottomNav'
-import Footer from '@/components/Footer'
 
 export default function DashboardLayout({
   children,
@@ -37,9 +36,6 @@ export default function DashboardLayout({
       <main className="flex-1 pb-32 md:pb-12">
         {children}
       </main>
-      <div className="mb-20">
-        <Footer />
-      </div>
       <BottomNav />
     </div>
   )
