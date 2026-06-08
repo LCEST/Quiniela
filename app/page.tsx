@@ -210,9 +210,14 @@ export default function HomePage() {
             </div>
             <span className="text-foreground font-bold">Quiniela Mundial 2026</span>
           </div>
-          <p className="text-muted text-sm">
-            Built with Next.js, Clerk, Supabase & Tailwind CSS
-          </p>
+          <div className="space-y-1">
+            <p className="text-muted text-sm">
+              Built by Luis Esturbán
+            </p>
+            <p className="text-muted/50 text-xs">
+              Next.js · Clerk · Supabase · Tailwind CSS
+            </p>
+          </div>
         </div>
       </footer>
     </div>

@@ -32,10 +32,15 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <main className="pb-24 md:pb-8">
+    <div className="min-h-screen bg-background flex flex-col">
+      <main className="flex-1 pb-24 md:pb-8">
         {children}
       </main>
+      <footer className="px-4 py-4 text-center border-t border-white/5">
+        <p className="text-muted/50 text-xs">
+          Built by Luis Esturbán · Next.js · Clerk · Supabase · Tailwind CSS
+        </p>
+      </footer>
       <BottomNav />
     </div>
   )
