@@ -33,7 +33,7 @@ export default function DashboardLayout({
 
   return (
     <div className="flex-1 flex flex-col">
-      <main className="flex-1 pb-24 md:pb-8">
+      <main className="flex-1 pb-32 md:pb-12">
         {children}
       </main>
       <BottomNav />
