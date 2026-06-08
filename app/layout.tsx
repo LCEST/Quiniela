@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import QueryProvider from "@/components/providers/QueryProvider";
+import { AppVersionChecker } from "@/components/AppVersionChecker";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Quiniela Mundial 2026",
   description: "Predice los resultados del Mundial 2026 y compite con tus amigos",
-  manifest: "/manifest.json?v=2",
+  manifest: "/manifest.json?v=3",
   icons: {
-    icon: "/icons/icon-192x192.png?v=2",
-    apple: "/icons/icon-192x192.png?v=2",
+    icon: "/icons/icon-192x192.png?v=3",
+    apple: "/icons/icon-192x192.png?v=3",
   },
   other: {
     "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -42,6 +43,7 @@ export default function RootLayout({
     >
       <html lang="es" className="dark">
         <body className="bg-background text-foreground antialiased min-h-screen">
+          <AppVersionChecker />
           <QueryProvider>
             {children}
           </QueryProvider>
