@@ -113,8 +113,8 @@ export default function HomePage() {
               },
               {
                 icon: <Users className="w-6 h-6" />,
-                title: 'Ligas Privadas',
-                description: 'Crea ligas privadas y compite con tus amigos. Código de invitación para unirse y subir en el ranking.',
+                title: 'Ranking Global',
+                description: 'Compite contra todos los usuarios del mundo. Ve tu posición en tiempo real y demuestra quién es el mejor.',
                 gradient: 'from-blue-500/20 to-cyan-500/10',
                 border: 'border-blue-500/20',
               },
@@ -127,8 +127,8 @@ export default function HomePage() {
               },
               {
                 icon: <TrendingUp className="w-6 h-6" />,
-                title: 'Ranking Global',
-                description: 'Compite contra todos los usuarios. Ve tu posición en tiempo real y demuestra quién es el mejor.',
+                title: 'Estadísticas en Vivo',
+                description: 'Sigue el rendimiento de tus predicciones en tiempo real. Análisis detallado de tu progreso.',
                 gradient: 'from-amber-500/20 to-orange-500/10',
                 border: 'border-amber-500/20',
               },
@@ -175,7 +175,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { value: '73', label: 'Partidos', suffix: '' },
+              { value: '72', label: 'Partidos', suffix: '' },
               { value: '48', label: 'Equipos', suffix: '' },
               { value: '12', label: 'Grupos', suffix: '' },
               { value: '∞', label: 'Diversión', suffix: '' },
