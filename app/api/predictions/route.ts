@@ -93,8 +93,8 @@ export async function POST(req: NextRequest) {
         user_id: userId,
         match_id,
         predicted_result,
-        home_score: home_score || null,
-        away_score: away_score || null,
+        home_score: home_score !== undefined && home_score !== null ? home_score : null,
+        away_score: away_score !== undefined && away_score !== null ? away_score : null,
       }, { onConflict: 'user_id,match_id' })
       .select('*, match:matches(*)')
       .single()

@@ -1,7 +1,7 @@
 // Configuración de administradores
 // Puedes agregar múltiples emails de admin aquí
 export const ADMIN_EMAILS = [
-  'luis@example.com', // Cambia esto por tu email real
+  'lcesturban10@gmail.com',
 ]
 
 export function isAdmin(email?: string): boolean {

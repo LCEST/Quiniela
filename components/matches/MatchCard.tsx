@@ -86,7 +86,7 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
     if (!selectedResult || locked) return
 
     // Validar marcador antes de enviar
-    if (homeScore && awayScore && !validateScore(homeScore, awayScore, selectedResult)) {
+    if (homeScore !== '' && awayScore !== '' && !validateScore(homeScore, awayScore, selectedResult)) {
       return
     }
     
@@ -95,8 +95,8 @@ export default function MatchCard({ match, prediction, onPredict, isSaving }: Ma
       await onPredict(
         match.id,
         selectedResult,
-        homeScore ? parseInt(homeScore) : null,
-        awayScore ? parseInt(awayScore) : null
+        homeScore !== '' ? parseInt(homeScore) : null,
+        awayScore !== '' ? parseInt(awayScore) : null
       )
     } catch (error) {
       console.error('Error saving prediction:', error)

@@ -13,14 +13,46 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Validar que los scores sean números enteros
+    const hScore = Number(homeScore)
+    const aScore = Number(awayScore)
+
+    if (isNaN(hScore) || isNaN(aScore)) {
+      return NextResponse.json(
+        { error: 'Los marcadores deben ser números válidos' },
+        { status: 400 }
+      )
+    }
+
+    if (!Number.isInteger(hScore) || !Number.isInteger(aScore)) {
+      return NextResponse.json(
+        { error: 'Los marcadores deben ser números enteros' },
+        { status: 400 }
+      )
+    }
+
+    if (hScore < 0 || aScore < 0) {
+      return NextResponse.json(
+        { error: 'Los marcadores no pueden ser negativos' },
+        { status: 400 }
+      )
+    }
+
+    if (hScore > 99 || aScore > 99) {
+      return NextResponse.json(
+        { error: 'Los marcadores no pueden ser mayores a 99' },
+        { status: 400 }
+      )
+    }
+
     const supabase = createServiceClient()
 
     // Actualizar el partido con el resultado y marcarlo como finished
     const { data: match, error: matchError } = await supabase
       .from('matches')
       .update({
-        home_score: homeScore,
-        away_score: awayScore,
+        home_score: hScore,
+        away_score: aScore,
         status: 'finished',
       })
       .eq('id', matchId)
@@ -46,7 +78,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Resultado actualizado: ${match.home_team?.name} ${homeScore} - ${awayScore} ${match.away_team?.name}`,
+      message: `Resultado actualizado: ${match.home_team?.name} ${hScore} - ${aScore} ${match.away_team?.name}`,
       match: match,
     })
   } catch (error) {
