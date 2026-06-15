@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { RefreshCw } from 'lucide-react'
 
 // Cambia este número cada vez que hagas un deploy importante
-const APP_VERSION = '3'
+const APP_VERSION = '4'
 
 export function AppVersionChecker() {
   const [showUpdate, setShowUpdate] = useState(false)
