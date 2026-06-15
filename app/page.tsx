@@ -1,6 +1,6 @@
 'use client'
 
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { Trophy, Globe, Zap, Shield, Users, Smartphone, ArrowRight, Sparkles, Star, TrendingUp } from "lucide-react";
 import Link from "next/link";
@@ -52,21 +52,21 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <SignedOut>
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Link href="/sign-up">
+                  <SignUpButton mode="modal">
                     <button className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-500 text-white rounded-2xl font-bold text-lg shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all flex items-center gap-3">
                       <Zap className="w-5 h-5" />
                       Crear Cuenta Gratis
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
-                  </Link>
+                  </SignUpButton>
                 </motion.div>
                 
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Link href="/sign-in">
+                  <SignInButton mode="modal">
                     <button className="px-8 py-4 bg-card/80 backdrop-blur-sm border border-white/10 text-foreground rounded-2xl font-bold text-lg hover:bg-card hover:border-white/20 transition-all">
                       Iniciar Sesión
                     </button>
-                  </Link>
+                  </SignInButton>
                 </motion.div>
               </SignedOut>
 

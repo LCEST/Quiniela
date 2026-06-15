@@ -9,8 +9,6 @@ export default function SignInPage() {
           <p className="text-muted">Inicia sesión para participar</p>
         </div>
         <SignIn 
-          routing="path"
-          path="/sign-in"
           fallbackRedirectUrl="/home"
           signUpUrl="/sign-up"
         />
