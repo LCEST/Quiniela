@@ -9,7 +9,6 @@ export default function SignUpPage() {
           <p className="text-muted">Crea tu cuenta para participar</p>
         </div>
         <SignUp 
-          fallbackRedirectUrl="/home"
           signInUrl="/sign-in"
         />
       </div>

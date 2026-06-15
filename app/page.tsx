@@ -1,12 +1,22 @@
 'use client'
 
-import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, useAuth } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { Trophy, Globe, Zap, Shield, Users, Smartphone, ArrowRight, Sparkles, Star, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
+  const { isLoaded, userId } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && userId) {
+      router.push('/home');
+    }
+  }, [isLoaded, userId, router]);
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       {/* Background Effects */}
