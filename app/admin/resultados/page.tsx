@@ -18,7 +18,8 @@ import {
   LogOut,
   ChevronDown,
   Search,
-  Zap
+  Zap,
+  Target
 } from 'lucide-react'
 import Link from 'next/link'
 import { SignOutButton } from '@clerk/nextjs'
@@ -153,6 +154,13 @@ export default function AdminResultsPage() {
               </div>
             </div>
             <div className="flex items-center gap-3">
+              <Link
+                href="/admin/predicciones"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-sm text-muted hover:text-foreground hover:bg-white/10 transition-all"
+              >
+                <Target className="w-4 h-4" />
+                Predicciones
+              </Link>
               <Link
                 href="/partidos"
                 className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-sm text-muted hover:text-foreground hover:bg-white/10 transition-all"
